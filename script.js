@@ -1,28 +1,32 @@
 /* Новые элементы должны добавляться в список по нажатию на Enter */
 const sendInput = document.querySelector('#input');
-const itemsContainer = document.querySelector('.container');
+const itemsContainer = document.querySelector('.items');
 
 
 function addEvent (){
-    const itemsText = sendInput.value;
-    const newItem = document.createElement('div');
-    newItem.classList.add('items');
-    newItem.textContent = itemsText;
-    newItem.addEventListener('click', function(){
-        newItem.classList.toggle('done');
-    })
+    const itemsText = sendInput.value.trim();
+    
 
-    if (itemsText != ''){
+     if (itemsText){
+        const newItem = document.createElement('div');
+        newItem.classList.add('items');
+        
+        newItem.textContent = itemsText;
+        newItem.addEventListener('click', function(){
+            newItem.classList.toggle('done');
+        })
         itemsContainer.append(newItem);
+        sendInput.value = '';
     }
-    sendInput.value = '';
+   
+    
 }
 
 
 
 sendInput.addEventListener('keydown', function(event) {
     
-    if (event.key == 'Enter') {
+    if (event.key === 'Enter') {
         addEvent ();
     }
     
